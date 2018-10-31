@@ -18,65 +18,53 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Desktop\src\ActionController.cpp">
+    <ClCompile Include="ActionController.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Desktop\src\Main.cpp">
+    <ClCompile Include="Main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Desktop\src\Pacman.cpp">
+    <ClCompile Include="MapGenerator.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Desktop\src\WindowController.cpp">
+    <ClCompile Include="Pacman.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Desktop\src\Domain\Score.cpp">
+    <ClCompile Include="Tile.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Desktop\src\FileStream\OutFileStream.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\git\Pacman-cpp\src\Pacman.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\git\Pacman-cpp\src\Tile.cpp">
+    <ClCompile Include="WindowController.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Desktop\src\ActionController.h">
+    <ClInclude Include="ActionController.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Desktop\src\FileStream\OutFileStream.h">
+    <ClInclude Include="MapGenerator.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Desktop\src\Pacman.h">
+    <ClInclude Include="Pacman.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Desktop\src\Domain\Score.h">
+    <ClInclude Include="Tile.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Desktop\src\WindowController.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\git\Pacman-cpp\src\MapGenerator.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\git\Pacman-cpp\src\Tile.h">
+    <ClInclude Include="WindowController.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Desktop\src\images\PacmanDown.PNG">
+    <Image Include="images\PacmanLeft.PNG">
       <Filter>images</Filter>
     </Image>
-    <Image Include="..\..\..\..\Desktop\src\images\PacmanLeft.PNG">
+    <Image Include="images\PacmanRight.PNG">
       <Filter>images</Filter>
     </Image>
-    <Image Include="..\..\..\..\Desktop\src\images\PacmanRight.PNG">
+    <Image Include="images\PacmanUp.PNG">
       <Filter>images</Filter>
     </Image>
-    <Image Include="..\..\..\..\Desktop\src\images\PacmanUp.PNG">
+    <Image Include="images\PacmanDown.PNG">
       <Filter>images</Filter>
     </Image>
   </ItemGroup>

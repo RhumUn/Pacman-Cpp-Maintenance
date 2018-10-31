@@ -18,6 +18,27 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ActionController.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MapGenerator.cpp" />
+    <ClCompile Include="Pacman.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="WindowController.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ActionController.h" />
+    <ClInclude Include="MapGenerator.h" />
+    <ClInclude Include="Pacman.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="WindowController.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\PacmanDown.PNG" />
+    <Image Include="images\PacmanLeft.PNG" />
+    <Image Include="images\PacmanRight.PNG" />
+    <Image Include="images\PacmanUp.PNG" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{6CA8C5A3-CB39-44FA-9769-4EF540053800}</ProjectGuid>
@@ -125,31 +146,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\Desktop\src\ActionController.cpp" />
-    <ClCompile Include="..\..\..\..\Desktop\src\Domain\Score.cpp" />
-    <ClCompile Include="..\..\..\..\Desktop\src\FileStream\OutFileStream.cpp" />
-    <ClCompile Include="..\..\..\..\Desktop\src\Main.cpp" />
-    <ClCompile Include="..\..\..\..\Desktop\src\Pacman.cpp" />
-    <ClCompile Include="..\..\..\..\Desktop\src\WindowController.cpp" />
-    <ClCompile Include="..\..\..\..\git\Pacman-cpp\src\Pacman.cpp" />
-    <ClCompile Include="..\..\..\..\git\Pacman-cpp\src\Tile.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\Desktop\src\ActionController.h" />
-    <ClInclude Include="..\..\..\..\Desktop\src\Domain\Score.h" />
-    <ClInclude Include="..\..\..\..\Desktop\src\FileStream\OutFileStream.h" />
-    <ClInclude Include="..\..\..\..\Desktop\src\Pacman.h" />
-    <ClInclude Include="..\..\..\..\Desktop\src\WindowController.h" />
-    <ClInclude Include="..\..\..\..\git\Pacman-cpp\src\MapGenerator.h" />
-    <ClInclude Include="..\..\..\..\git\Pacman-cpp\src\Tile.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\..\..\..\Desktop\src\images\PacmanDown.PNG" />
-    <Image Include="..\..\..\..\Desktop\src\images\PacmanLeft.PNG" />
-    <Image Include="..\..\..\..\Desktop\src\images\PacmanRight.PNG" />
-    <Image Include="..\..\..\..\Desktop\src\images\PacmanUp.PNG" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
