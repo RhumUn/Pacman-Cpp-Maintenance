@@ -3,7 +3,7 @@
 
 #include "ActionController.h"
 #include <windows.h>
-#include "Pacman.h"
+#include "../../Domain/Pacman/Pacman.h"
 
 
 using namespace std;

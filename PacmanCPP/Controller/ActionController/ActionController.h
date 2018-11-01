@@ -9,7 +9,7 @@
 #define ACTIONCONTROLLER_H_
 
 #include <iostream>
-#include "Pacman.h"
+#include "../../Domain/Pacman/Pacman.h"
 
 using namespace std;
 

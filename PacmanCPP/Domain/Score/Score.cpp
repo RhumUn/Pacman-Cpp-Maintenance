@@ -6,7 +6,7 @@
  */
 
 #include "Score.h"
-#include "../FileStream/OutFileStream.h"
+#include "../../FileStream/OutFileStream/OutFileStream.h"
 #include <string>
 
 Score::Score(std::string playerName) :

@@ -1,5 +1,5 @@
 /*
- * MapGenerator.cpp
+ * Map.cpp
  *
  *  Created on: 30 oct. 2018
  *      Author: Romain
@@ -7,19 +7,19 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
-#include "MapGenerator.h"
-#include "Tile.h"
+#include "../Map/Map.h"
+#include "../Tile/Tile.h"
 using namespace std;
 
-MapGenerator::MapGenerator() {
+Map::Map() {
 	cout << "Generator created";
 }
 
-MapGenerator::~MapGenerator() {
+Map::~Map() {
 	// TODO Auto-generated destructor stub
 }
 
-int MapGenerator::GenerateMap() {
+int Map::GenerateMap() {
 	 cout << "Map generation";
 	 std::vector<std::vector<Tile>> map(32);
 	 int i, j;
