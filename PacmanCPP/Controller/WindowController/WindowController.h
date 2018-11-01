@@ -19,7 +19,7 @@ public:
 
 	void create();
 	void initWindow();
-	bool loadImage();
+	void loadImage();
 	void closeWindow();
 	SDL_Surface* loadSurface(std::string path);
 
