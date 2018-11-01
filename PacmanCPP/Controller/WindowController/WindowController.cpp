@@ -48,7 +48,7 @@ using namespace std;
 		window = SDL_CreateWindow("Pacman ce gros porc",
 		                              SDL_WINDOWPOS_CENTERED,
 		                              SDL_WINDOWPOS_CENTERED,
-		                              640, 480,
+		                              685, 745,
 		                              SDL_WINDOW_SHOWN);
 
 		int imageFlag = IMG_INIT_PNG;
