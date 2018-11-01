@@ -60,9 +60,8 @@ using namespace std;
 
 	bool WindowController::loadImage(){
 		bool success = true;
-
 		//Load PNG surface
-		image = loadSurface("C:\\Users\\Romain\\Desktop\\src\\images\\PacmanDown.PNG");
+		image = loadSurface("PacmanDown.PNG");
 		if( image == NULL )
 		{
 			printf( "Failed to load PNG image!\n" );
@@ -83,7 +82,8 @@ using namespace std;
 
 
 	SDL_Surface* WindowController::loadSurface(std::string path){
-		loadedSurface = IMG_Load(path.c_str());
+		loadedSurface = IMG_Load("images/PacmanLeft.PNG");
+		printf(IMG_GetError());
 		optimizedSurface = SDL_ConvertSurface(loadedSurface, screenSurface->format, NULL);
 
 		SDL_FreeSurface(loadedSurface);

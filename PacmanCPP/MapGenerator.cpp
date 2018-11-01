@@ -19,7 +19,7 @@ MapGenerator::~MapGenerator() {
 	// TODO Auto-generated destructor stub
 }
 
-MapGenerator::GenerateMap() {
+int MapGenerator::GenerateMap() {
 	 cout << "Map generation";
 	 std::vector<std::vector<Tile>> map(32);
 	 int i, j;
