@@ -12,7 +12,7 @@
 #include <SDL.h>
 
 #include "Domain/Pacman/Pacman.h"
-#include "Controller/ActionController/ActionController.h"
+//#include "Controller/ActionController/ActionController.h"
 #include "Controller/WindowController/WindowController.h"
 
 using namespace std;
