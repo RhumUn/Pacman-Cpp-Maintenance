@@ -19,11 +19,9 @@ public:
 	ActionController();
 	ActionController(Pacman pacman);
 
-	void mouvement();
+	void mouvement(SDL_Event e);
 
 private:
 	Pacman pacman;
-	SDL_Event e;
-	bool quit = false;
 };
 #endif /* CONTROLLER_ACTIONCONTROLLER_H_ */

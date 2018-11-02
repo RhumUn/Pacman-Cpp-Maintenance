@@ -6,6 +6,7 @@
 #include "../../Domain/Pacman/Pacman.h"
 
 
+
 using namespace std;
 
 
@@ -14,36 +15,27 @@ ActionController::ActionController(Pacman pacman) : pacman(pacman) {}
 
 
 
-void ActionController::mouvement() {
+void ActionController::mouvement(SDL_Event e) {
 
-	while (!quit)
+	if (e.type == SDL_KEYDOWN)
 	{
-		while (SDL_PollEvent(&e) != 0)
+		switch (e.key.keysym.sym)
+		{
+		case SDLK_UP: pacman.goUp();
+			break;
 
-			if (e.type == SDL_QUIT)
-			{
-				quit = true;
-			}
+		case SDLK_DOWN: pacman.goDown();
+			break;
 
-			else if (e.type == SDL_KEYDOWN)
-			{
-				switch (e.key.keysym.sym)
-				{
-				case SDLK_UP: pacman.goUp();
-					break;
+		case SDLK_LEFT: pacman.goLeft();
+			break;
 
-				case SDLK_DOWN: pacman.goDown();
-					break;
+		case SDLK_RIGHT: pacman.goRight();
+			break;
 
-				case SDLK_LEFT: pacman.goLeft();
-					break;
-
-				case SDLK_RIGHT: pacman.goRight();
-					break;
-
-				default:
-					break;
-				}
-			}
+		default:
+			break;
+		}
 	}
 }
+	

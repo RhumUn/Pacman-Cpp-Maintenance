@@ -6,7 +6,8 @@
 #include <windows.h>
 
 #include "WindowController.h"
-
+#include "../ActionController/ActionController.h"
+#include "../../Domain/Pacman/Pacman.h"7
 
 using namespace std;
 
@@ -15,14 +16,8 @@ using namespace std;
 	void WindowController::create(){
 
 		initWindow();
-		SDL_Delay(5000);
-		
-		if( !loadImage() )
-		{
-			printf( "Failed to load media!\n" );
-		}
-		else
-		{
+		loadImage();
+	
 			bool quit = false;
 			SDL_Event e;
 
@@ -38,8 +33,12 @@ using namespace std;
 
 				SDL_BlitSurface(image, NULL, screenSurface, NULL);
 				SDL_UpdateWindowSurface(window);
+
+				Pacman petitPacman(6,6);
+				ActionController action(petitPacman);
+				action.mouvement(e);
 			}
-		}
+		
 		closeWindow();
 	}
 
@@ -49,7 +48,7 @@ using namespace std;
 		window = SDL_CreateWindow("Pacman ce gros porc",
 		                              SDL_WINDOWPOS_CENTERED,
 		                              SDL_WINDOWPOS_CENTERED,
-		                              640, 480,
+		                              685, 745,
 		                              SDL_WINDOW_SHOWN);
 
 		int imageFlag = IMG_INIT_PNG;
@@ -58,16 +57,13 @@ using namespace std;
 	}
 
 
-	bool WindowController::loadImage(){
-		bool success = true;
-		//Load PNG surface
-		image = loadSurface("PacmanDown.PNG");
+	void WindowController::loadImage(){
+
+		image = loadSurface("Resources/Map.PNG");
 		if( image == NULL )
 		{
 			printf( "Failed to load PNG image!\n" );
-			success = false;
 		}
-		return success;
 	}
 
 
@@ -82,7 +78,7 @@ using namespace std;
 
 
 	SDL_Surface* WindowController::loadSurface(std::string path){
-		loadedSurface = IMG_Load("images/PacmanLeft.PNG");
+		loadedSurface = IMG_Load(path.c_str());
 		printf(IMG_GetError());
 		optimizedSurface = SDL_ConvertSurface(loadedSurface, screenSurface->format, NULL);
 
