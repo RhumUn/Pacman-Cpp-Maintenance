@@ -11,7 +11,7 @@
 #include <string>
 #include<vector>
 
-class Score {
+static class Score {
 public:
 	Score();
 

@@ -1,4 +1,5 @@
 #include "Score.h"
+#include "../Time/Time.h"
 #include "../../FileStream/OutFileStream/OutFileStream.h"
 #include "../../FileStream//InFileStream/InFileStream.h"
 #include <string>
@@ -72,6 +73,7 @@ std::string Score::scoresContentsToSave(std::vector<std::string> vectorOf5BestSc
 }
 
 std::string Score::toString() {
-	return "Date du jour 1: " + std::to_string(this->m_score);
+	Time time;
+	return  time.getCurrentTime + " :" + std::to_string(this->m_score);
 }
 
