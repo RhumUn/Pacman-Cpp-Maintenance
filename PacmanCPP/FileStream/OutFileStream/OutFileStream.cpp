@@ -4,13 +4,13 @@
 #include <string>
 
 OutFileStream::OutFileStream(std::string relativePath) :
-		m_outFileStream(relativePath, std::ios::app) {
+		m_outFileStream(relativePath) {
 }
 
 void OutFileStream::write(std::string content) {
 	try {
 		if (this->m_outFileStream) {
-			this->m_outFileStream << content << std::endl;
+			this->m_outFileStream << content;
 		} else {
 			throw "Impossible d'écrire dans le fichier texte";
 		}

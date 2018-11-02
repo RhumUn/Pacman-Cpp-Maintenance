@@ -9,6 +9,12 @@
 #define WINDOWCONTROLLER_H_
 
 #include <iostream>
+
+#include "../../Domain/Pacman/Pacman.h"
+
+
+#include "../../Domain/Tile/Tile.h"
+
 using namespace std;
 
 
@@ -17,10 +23,11 @@ class WindowController
 public:
 	WindowController();
 
-	void create();
+	void create(Pacman pacman);
 	void initWindow();
-	void loadImage();
+	void loadImage(Pacman pacman);
 	void closeWindow();
+	void loadMap(SDL_Renderer *renderer);
 	SDL_Surface* loadSurface(std::string path);
 
 private:
@@ -29,6 +36,10 @@ private:
 	SDL_Surface* image = NULL;
 	SDL_Surface* optimizedSurface = NULL;
 	SDL_Surface* loadedSurface = NULL;
+	int heigth = 22;
+	int width = 20;
+	int obstacleSize = 32;
+	SDL_Event e;
 };
 
 

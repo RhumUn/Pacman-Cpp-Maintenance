@@ -30,10 +30,10 @@ public:
 	void goDown();
 	void goLeft();
 	void goRight();
-
+	int x, y;
 
 private:
-	int x,y;
+	
 	string image;
 };
 

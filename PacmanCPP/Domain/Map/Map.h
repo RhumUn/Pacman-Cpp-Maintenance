@@ -15,9 +15,10 @@ class Map {
 public:
 	Map();
 	virtual ~Map();
-	int GenerateMap();
-	int height = 28;
-	int width = 31;
+	void Generate();
+	string getLayoutLine(string line);
+	int height = 22;
+	int width = 20;
 	std::vector<std::vector<Tile>> tiles;
 };
 

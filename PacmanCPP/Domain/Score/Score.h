@@ -9,12 +9,11 @@
 #define DOMAIN_SCORE_H_
 
 #include <string>
+#include<vector>
 
 class Score {
 public:
-	Score(std::string playerName);
-
-	virtual ~Score();
+	Score();
 
 	int getScore();
 
@@ -22,12 +21,18 @@ public:
 
 	void saveScore();
 
-	std::string toString();
-
 private:
 	int m_score;
 
-	std::string m_playerName;
+	std::vector<std::string> get5BestScores();
+
+	int getScoreValue(std::string scoreSavedInString);
+
+	bool isOneOf5BestScores(std::vector<std::string> const& vectorOf5BestScores);
+
+	std::string scoresContentsToSave(std::vector<std::string> vectorOf5BestScores);
+
+	std::string toString();
 };
 
 #endif /* DOMAIN_SCORE_H_ */
