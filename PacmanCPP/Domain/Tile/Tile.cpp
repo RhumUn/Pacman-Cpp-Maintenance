@@ -7,10 +7,11 @@
 
 #include "Tile.h"
 
-Tile::Tile(int _x, int _y, int _sprite) {
+Tile::Tile(int _x, int _y, bool _obstacleState, bool _collectibleState) {
 	x = _x;
 	y = _y;
-	sprite = _sprite;
+	obstacleState = _obstacleState;
+	collectibleState = _collectibleState;
 }
 
 int Tile::getX() {
@@ -21,8 +22,12 @@ int Tile::getY() {
 	return this->y;
 }
 
-int Tile::getSprite() {
-	return this->sprite;
+bool Tile::isObstacle() {
+	return this->obstacleState;
+}
+
+bool Tile::isCollectible() {
+	return this->collectibleState;
 }
 
 Tile::~Tile() {

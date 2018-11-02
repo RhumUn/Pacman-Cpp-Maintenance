@@ -14,6 +14,7 @@
 #include "Domain/Pacman/Pacman.h"
 #include "Controller/ActionController/ActionController.h"
 #include "Controller/WindowController/WindowController.h"
+#include "Domain/Map/Map.h"
 
 using namespace std;
 

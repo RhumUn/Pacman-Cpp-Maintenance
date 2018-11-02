@@ -13,14 +13,16 @@
 class Tile {
 public:
 	Tile();
-	Tile(int _x, int _y, int _sprite);
+	Tile(int _x, int _y, bool _sprite, bool _collectibleState);
 	virtual ~Tile();
 	int getX();
 	int getY();
-	int getSprite();
+	bool isObstacle();
+	bool isCollectible();
 	int x;
 	int y;
-	int sprite;
+	bool obstacleState;
+	bool collectibleState;
 };
 
 #endif /* TILE_H_ */

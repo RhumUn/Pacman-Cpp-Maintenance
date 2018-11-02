@@ -9,6 +9,8 @@
 #define WINDOWCONTROLLER_H_
 
 #include <iostream>
+#include "../../Domain/Tile/Tile.h"
+
 using namespace std;
 
 
@@ -21,6 +23,7 @@ public:
 	void initWindow();
 	bool loadImage();
 	void closeWindow();
+	void loadMap(SDL_Renderer *renderer);
 	SDL_Surface* loadSurface(std::string path);
 
 private:
@@ -29,6 +32,9 @@ private:
 	SDL_Surface* image = NULL;
 	SDL_Surface* optimizedSurface = NULL;
 	SDL_Surface* loadedSurface = NULL;
+	int heigth = 22;
+	int width = 20;
+	int obstacleSize = 32;
 };
 
 
