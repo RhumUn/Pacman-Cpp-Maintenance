@@ -21,10 +21,10 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 
-	Pacman petitPacman(6, 6);
-	petitPacman.setImage("Resources/PacmanLeft.PNG");
-	WindowController window;
-	window.create(petitPacman);
+	Map map;
+	map.Generate();
+	Pacman petitPacman(map);
+	WindowController window(petitPacman, map);
 
     return 0;
 }

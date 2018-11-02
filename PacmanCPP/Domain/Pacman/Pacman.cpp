@@ -2,13 +2,14 @@
 #include <string>
 
 #include "Pacman.h"
+#include "../Map/Map.h"
 
 using namespace std;
-
-
-	 Pacman::Pacman(): x(0), y(0){}
-	 Pacman::Pacman(int x, int y) : x(x), y(y){}
-
+	 Pacman::Pacman(Map _map){
+		 this->x = 6;
+		 this->y = 6;
+		 this->map = _map;
+	 }
 
 	 int Pacman::getX() const {
 	 	return x;
@@ -26,38 +27,34 @@ using namespace std;
 	 	this->y = y;
 	 }
 
-	 string Pacman::getImage() {
-	 	return image;
-	 }
-
-	 void Pacman::setImage(string image) {
-	 	this->image = image;
-	 }
-
-
-
-	 void Pacman::goUp(){
-		// if(y + 1 < getYMap){
-			this-> y = y+1;
-			 this-> image = "Resources/PacmanUp.PNG";
-		 //}
-	 }
-	 void Pacman::goDown(){
-		// if(y - 1 < getYMap){
+	 bool Pacman::goUp(){
+		 if(!map.tiles[this->x][this->y - 1].isObstacle()){
 			this-> y = y-1;
-			this-> image = "Resources/PacmanDown.PNG";
-		// }
+			return true;
+		 }
+		 return false;
 	 }
-	 void Pacman::goLeft(){
-		 //if(x - 1 < getYMap){
-			this-> x = x-1;
-			this-> image = "Resources/PacmanLeft.PNG";
-		// }
+	 bool Pacman::goDown(){
+		 if (!map.tiles[this->x][this->y + 1].isObstacle()) {
+			 this-> y = y+1;
+			 return true;
+		 }
+		 return false;
+
 	 }
-	 void Pacman::goRight(){
-		 //if(x - 1 < getYMap){
-			this-> x = x+1;
-			this-> image = "Resources/PacmanRight.PNG";
-		 //}
+	 bool Pacman::goLeft(){
+		 if (!map.tiles[this->x  -1][this->y].isObstacle()) {
+			 this-> x = x-1;
+			 return true;
+		 }
+		 return false;
+
+	 }
+	 bool Pacman::goRight(){
+		 if (!map.tiles[this->x + 1][this->y].isObstacle()) {
+			 this-> x = x+1;
+			 return true;
+		 }
+		 return false;
 	 }
 

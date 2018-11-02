@@ -11,14 +11,13 @@
 
 #include <iostream>
 #include <string>
+#include "../Map/Map.h"
 using namespace std;
 
 class Pacman
 {
 public:
-	Pacman();
-	Pacman(int x, int y);
-
+	Pacman(Map _map);
 	void setX(int x);
 	void setY(int y);
 	void setImage(string image);
@@ -26,14 +25,14 @@ public:
 	int getY() const;
 	string getImage();
 
-	void goUp();
-	void goDown();
-	void goLeft();
-	void goRight();
+	bool goUp();
+	bool goDown();
+	bool goLeft();
+	bool goRight();
 	int x, y;
 
 private:
-	
+	Map map;
 	string image;
 };
 

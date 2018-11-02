@@ -13,89 +13,98 @@
 
 using namespace std;
 
-WindowController::WindowController() {}
+WindowController::WindowController(Pacman petitPacman, Map _map) {
+	initWindow();
+	loadMap();
+	loadPacman(petitPacman);
+	bool quit = false;
+	SDL_Rect pacmanPreviousPosition;
+	pacmanPreviousPosition.h = objectSize;
+	pacmanPreviousPosition.w = objectSize;
 
-	void WindowController::create(Pacman petitPacman){
-
-		initWindow();
-	
-		bool quit = false;
+	SDL_Surface* emptyTileSurface = SDL_CreateRGBSurface(0, objectSize, objectSize, 32, 0, 0, 0, 0);
+	SDL_Texture* emptyTileTexture = SDL_CreateTextureFromSurface(renderer, emptyTileSurface);
 
 
-			
-		while (!quit)
+	while (!quit)
+	{
+		while (SDL_PollEvent(&e) != 0)
 		{
-			loadImage(petitPacman);
-			SDL_BlitSurface(image, NULL, screenSurface, NULL);
-			SDL_UpdateWindowSurface(window);
-
-			while (SDL_PollEvent(&e) != 0)
+			if (e.type == SDL_QUIT)
 			{
-				if (e.type == SDL_QUIT)
-				{
-					quit = true;
-				}
+				quit = true;
 			}
-
-			if (e.type == SDL_KEYDOWN)
-			{
-				switch(e.key.keysym.sym)
-				{
-				case SDLK_UP: petitPacman.goUp();
-					break;
-
-				case SDLK_DOWN: petitPacman.goDown();
-					break;
-
-				case SDLK_LEFT: petitPacman.goLeft();
-					break;
-
-				case SDLK_RIGHT: petitPacman.goRight();
-					break;
-
-				default:
-					break;
-				}				
-			}
-			SDL_Rect rect;
-			rect.x = -5;
-			rect.y = -5;
-			SDL_BlitSurface(image, NULL, screenSurface, &rect);
-
 		}
-		closeWindow();
-	}
 
+		if (e.type == SDL_KEYDOWN)
+		{
+			pacmanPreviousPosition.x = petitPacman.getX() * objectSize;
+			pacmanPreviousPosition.y = petitPacman.getY() * objectSize;
+			switch (e.key.keysym.sym)
+			{
+			case SDLK_UP:
+				if (petitPacman.goUp()) {
+					this->pacmanTexture = SDL_CreateTextureFromSurface(renderer, this->pacmanSurfaceUp);
+					SDL_RenderCopy(this->renderer, emptyTileTexture, NULL, &pacmanPreviousPosition);
+					updatePacman(petitPacman);
+				}
+				break;
+
+			case SDLK_DOWN:
+				if (petitPacman.goDown()) {
+					this->pacmanTexture = SDL_CreateTextureFromSurface(renderer, this->pacmanSurfaceDown);
+					SDL_RenderCopy(this->renderer, emptyTileTexture, NULL, &pacmanPreviousPosition);
+					updatePacman(petitPacman);
+				}
+				break;
+
+			case SDLK_LEFT:
+				if (petitPacman.goLeft()) {
+					this->pacmanTexture = SDL_CreateTextureFromSurface(renderer, this->pacmanSurfaceLeft);
+					SDL_RenderCopy(this->renderer, emptyTileTexture, NULL, &pacmanPreviousPosition);
+					updatePacman(petitPacman);
+				}
+				break;
+
+			case SDLK_RIGHT:
+				if (petitPacman.goRight()) {
+					this->pacmanTexture = SDL_CreateTextureFromSurface(renderer, this->pacmanSurfaceRight);
+					SDL_RenderCopy(this->renderer, emptyTileTexture, NULL, &pacmanPreviousPosition);
+					updatePacman(petitPacman);
+				}
+				break;
+
+			default:
+				break;
+			}
+			updateWindow();
+
+			SDL_Delay(100);
+		}
+	}
+	closeWindow();
+}
 
 void WindowController::initWindow() {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("Pacman ce gros porc",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
-		heigth * obstacleSize, width * obstacleSize,
+		heigth * objectSize, width * objectSize,
 		SDL_WINDOW_SHOWN);
-
+	this->renderer = SDL_CreateRenderer(window, -1, 0);
+	SDL_RenderClear(renderer);
 	int imageFlag = IMG_INIT_PNG;
 	IMG_Init(imageFlag);
 	screenSurface = SDL_GetWindowSurface(window);
 }
 
+void WindowController::updateWindow() {
+	SDL_RenderPresent(this->renderer);
+}
 
-	bool WindowController::loadImage(){
-		bool success = true;
-		//Load PNG surface
-		image = loadSurface("PacmanDown.PNG");
-		if( image == NULL )
-		{
-			printf( "Failed to load PNG image!\n" );
-			success = false;
-		}
-		return success;
-	}
-
-void WindowController::loadMap(SDL_Renderer *renderer) {
-	Map map;
-	map.Generate();
+void WindowController::loadMap() {
+	this->map.Generate();
 	std::vector<std::vector<Tile>> tilesMap = map.tiles;
 
 	SDL_Surface* obstacleTileSurface = loadSurface("Resources/obstacle_tile.png");
@@ -106,12 +115,12 @@ void WindowController::loadMap(SDL_Renderer *renderer) {
 
 
 	SDL_Rect tilePosition;
-	tilePosition.h = obstacleSize;
-	tilePosition.w = obstacleSize;
+	tilePosition.h = objectSize;
+	tilePosition.w = objectSize;
 	for (int i = 0; i < heigth; i++) {
 		for (int j = 0; j < width; j++) {
-			tilePosition.x = i * obstacleSize;
-			tilePosition.y = j * obstacleSize;
+			tilePosition.x = i * objectSize;
+			tilePosition.y = j * objectSize;
 			if (tilesMap[i][j].isObstacle()) {
 				SDL_RenderCopy(renderer, obstacleTileTexture, NULL, &tilePosition);
 			}
@@ -123,8 +132,35 @@ void WindowController::loadMap(SDL_Renderer *renderer) {
 			}
 		}
 	}
-	SDL_RenderPresent(renderer);
+	updateWindow();
 }
+
+void WindowController::loadPacman(Pacman pacman)
+{
+	this->pacmanSurfaceLeft = loadSurface("Resources/PacmanLeft.png");
+	this->pacmanSurfaceRight = loadSurface("Resources/PacmanRight.png");
+	this->pacmanSurfaceUp = loadSurface("Resources/PacmanUp.png");
+	this->pacmanSurfaceDown = loadSurface("Resources/PacmanDown.png");
+	this->pacmanTexture = SDL_CreateTextureFromSurface(renderer, pacmanSurfaceLeft);
+
+	this->pacmanPosition;
+	this->pacmanPosition.h = objectSize;
+	this->pacmanPosition.w = objectSize;
+	this->pacmanPosition.x = pacman.getX() * objectSize;
+	this->pacmanPosition.y = pacman.getY() * objectSize;
+
+	SDL_RenderCopy(renderer, pacmanTexture, NULL, &pacmanPosition);
+	updateWindow();
+}
+
+void WindowController::updatePacman(Pacman pacman)
+{
+	this->pacmanPosition.x = pacman.getX() * objectSize;
+	this->pacmanPosition.y = pacman.getY() * objectSize;
+
+	SDL_RenderCopy(this->renderer, this->pacmanTexture, NULL, &this->pacmanPosition);
+}
+
 void WindowController::closeWindow() {
 	SDL_FreeSurface(image);
 	image = NULL;
