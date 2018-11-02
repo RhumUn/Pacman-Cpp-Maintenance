@@ -20,16 +20,15 @@ public:
 	Pacman(Map _map);
 	void setX(int x);
 	void setY(int y);
-	void setImage(string image);
 	int getX() const;
 	int getY() const;
-	string getImage();
-
+	void scoreUp(int tileX, int tileY);
 	bool goUp();
 	bool goDown();
 	bool goLeft();
 	bool goRight();
 	int x, y;
+	int score;
 
 private:
 	Map map;

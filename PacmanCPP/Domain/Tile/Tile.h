@@ -17,8 +17,11 @@ public:
 	virtual ~Tile();
 	int getX();
 	int getY();
+	void setObstacleState(bool _obstacleState);
+	void setCollectibleState(bool _collectibleState);
 	bool isObstacle();
 	bool isCollectible();
+private:
 	int x;
 	int y;
 	bool obstacleState;

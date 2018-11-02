@@ -9,6 +9,7 @@ using namespace std;
 		 this->x = 6;
 		 this->y = 6;
 		 this->map = _map;
+		 this->score = 0;
 	 }
 
 	 int Pacman::getX() const {
@@ -23,12 +24,22 @@ using namespace std;
 	 	return y;
 	 }
 
+	 void Pacman::scoreUp(int tileX, int tileY)
+	 {
+		 this->score += 200;
+		 map.tiles[tileX][tileY].setCollectibleState(false);
+		 printf("Score: %i", this->score);
+	 }
+
 	 void Pacman::setY(int y) {
 	 	this->y = y;
 	 }
 
 	 bool Pacman::goUp(){
 		 if(!map.tiles[this->x][this->y - 1].isObstacle()){
+			 if (map.tiles[this->x][this->y - 1].isCollectible()) {
+				 scoreUp(this->x, this->y - 1);
+			 }
 			this-> y = y-1;
 			return true;
 		 }
@@ -36,6 +47,9 @@ using namespace std;
 	 }
 	 bool Pacman::goDown(){
 		 if (!map.tiles[this->x][this->y + 1].isObstacle()) {
+			 if (map.tiles[this->x][this->y + 1].isCollectible()) {
+				 scoreUp(this->x, this->y + 1);
+			 }
 			 this-> y = y+1;
 			 return true;
 		 }
@@ -43,7 +57,10 @@ using namespace std;
 
 	 }
 	 bool Pacman::goLeft(){
-		 if (!map.tiles[this->x  -1][this->y].isObstacle()) {
+		 if (!map.tiles[this->x  - 1][this->y].isObstacle()) {
+			 if (map.tiles[this->x - 1][this->y].isCollectible()) {
+				 scoreUp(this->x - 1, this->y);
+			 }
 			 this-> x = x-1;
 			 return true;
 		 }
@@ -52,6 +69,9 @@ using namespace std;
 	 }
 	 bool Pacman::goRight(){
 		 if (!map.tiles[this->x + 1][this->y].isObstacle()) {
+			 if (map.tiles[this->x + 1][this->y].isCollectible()) {
+				 scoreUp(this->x + 1, this->y);
+			 }
 			 this-> x = x+1;
 			 return true;
 		 }

@@ -22,6 +22,16 @@ int Tile::getY() {
 	return this->y;
 }
 
+void Tile::setObstacleState(bool _obstacleState)
+{
+	this->obstacleState = _obstacleState;
+}
+
+void Tile::setCollectibleState(bool _collectibleState)
+{
+	this->collectibleState= _collectibleState;
+}
+
 bool Tile::isObstacle() {
 	return this->obstacleState;
 }
