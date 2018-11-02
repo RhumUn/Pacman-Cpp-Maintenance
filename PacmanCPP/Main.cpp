@@ -12,14 +12,19 @@
 #include <SDL.h>
 
 #include "Controller/WindowController/WindowController.h"
+#include "Domain/Map/Map.h"
+#include "Domain/Pacman/Pacman.h"
+
 
 using namespace std;
 
 
 int main(int argc, char* argv[]) {
 
+	Pacman petitPacman(6, 6);
+	petitPacman.setImage("Resources/PacmanLeft.PNG");
 	WindowController window;
-	window.create();
+	window.create(petitPacman);
 
     return 0;
 }
