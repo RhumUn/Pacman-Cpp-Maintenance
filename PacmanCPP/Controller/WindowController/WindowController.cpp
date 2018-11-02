@@ -6,39 +6,60 @@
 #include <windows.h>
 
 #include "WindowController.h"
-#include "../ActionController/ActionController.h"
-#include "../../Domain/Pacman/Pacman.h"7
+#include "../../Domain/Pacman/Pacman.h"
 
 using namespace std;
 
 	WindowController :: WindowController(){}
 
-	void WindowController::create(){
+	void WindowController::create(Pacman petitPacman){
 
 		initWindow();
-		loadImage();
 	
-			bool quit = false;
-			SDL_Event e;
+		bool quit = false;
 
-			while( !quit )
+
+			
+		while (!quit)
+		{
+			loadImage(petitPacman);
+			SDL_BlitSurface(image, NULL, screenSurface, NULL);
+			SDL_UpdateWindowSurface(window);
+
+			while (SDL_PollEvent(&e) != 0)
 			{
-				while( SDL_PollEvent( &e ) != 0 )
+				if (e.type == SDL_QUIT)
 				{
-					if( e.type == SDL_QUIT )
-					{
-						quit = true;
-					}
+					quit = true;
 				}
-
-				SDL_BlitSurface(image, NULL, screenSurface, NULL);
-				SDL_UpdateWindowSurface(window);
-
-				Pacman petitPacman(6,6);
-				ActionController action(petitPacman);
-				action.mouvement(e);
 			}
-		
+
+			if (e.type == SDL_KEYDOWN)
+			{
+				switch(e.key.keysym.sym)
+				{
+				case SDLK_UP: petitPacman.goUp();
+					break;
+
+				case SDLK_DOWN: petitPacman.goDown();
+					break;
+
+				case SDLK_LEFT: petitPacman.goLeft();
+					break;
+
+				case SDLK_RIGHT: petitPacman.goRight();
+					break;
+
+				default:
+					break;
+				}				
+			}
+			SDL_Rect rect;
+			rect.x = -5;
+			rect.y = -5;
+			SDL_BlitSurface(image, NULL, screenSurface, &rect);
+
+		}
 		closeWindow();
 	}
 
@@ -57,9 +78,8 @@ using namespace std;
 	}
 
 
-	void WindowController::loadImage(){
-
-		image = loadSurface("Resources/Map.PNG");
+	void WindowController::loadImage(Pacman petitPacman){
+		image = loadSurface(petitPacman.getImage());
 		if( image == NULL )
 		{
 			printf( "Failed to load PNG image!\n" );
@@ -79,9 +99,7 @@ using namespace std;
 
 	SDL_Surface* WindowController::loadSurface(std::string path){
 		loadedSurface = IMG_Load(path.c_str());
-		printf(IMG_GetError());
 		optimizedSurface = SDL_ConvertSurface(loadedSurface, screenSurface->format, NULL);
-
 		SDL_FreeSurface(loadedSurface);
 
 		return optimizedSurface;

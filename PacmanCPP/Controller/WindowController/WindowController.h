@@ -9,6 +9,10 @@
 #define WINDOWCONTROLLER_H_
 
 #include <iostream>
+
+#include "../../Domain/Pacman/Pacman.h"
+
+
 using namespace std;
 
 
@@ -17,9 +21,9 @@ class WindowController
 public:
 	WindowController();
 
-	void create();
+	void create(Pacman pacman);
 	void initWindow();
-	void loadImage();
+	void loadImage(Pacman pacman);
 	void closeWindow();
 	SDL_Surface* loadSurface(std::string path);
 
@@ -29,6 +33,7 @@ private:
 	SDL_Surface* image = NULL;
 	SDL_Surface* optimizedSurface = NULL;
 	SDL_Surface* loadedSurface = NULL;
+	SDL_Event e;
 };
 
 
