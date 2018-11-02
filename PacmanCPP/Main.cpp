@@ -11,20 +11,20 @@
 #include <windows.h>
 #include <SDL.h>
 
-#include "Domain/Pacman/Pacman.h"
-#include "Controller/ActionController/ActionController.h"
 #include "Controller/WindowController/WindowController.h"
 #include "Domain/Map/Map.h"
+#include "Domain/Pacman/Pacman.h"
+
 
 using namespace std;
 
 
 int main(int argc, char* argv[]) {
 
-	//Pacman petitPacman(6,6);
-	//ActionController action(petitPacman);
+	Pacman petitPacman(6, 6);
+	petitPacman.setImage("Resources/PacmanLeft.PNG");
 	WindowController window;
-	window.create();
-  	//action.mouvement();
+	window.create(petitPacman);
+
     return 0;
 }

@@ -9,42 +9,62 @@
 #include "WindowController.h"
 #include "../../Domain/Tile/Tile.h"
 #include "../../Domain/Map/Map.h"
+#include "../../Domain/Pacman/Pacman.h"
 
 using namespace std;
 
 WindowController::WindowController() {}
 
-void WindowController::create() {
+	void WindowController::create(Pacman petitPacman){
 
-	initWindow();
-	SDL_Delay(5000);
-	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	loadMap(renderer);
-	//if (!loadImage())
-	//{
-	//	printf("Failed to load media!\n");
-	//}
-	//else
-	//{
-	//	bool quit = false;
-	//	SDL_Event e;
+		initWindow();
+	
+		bool quit = false;
 
-	//	while (!quit)
-	//	{
-	//		while (SDL_PollEvent(&e) != 0)
-	//		{
-	//			if (e.type == SDL_QUIT)
-	//			{
-	//				quit = true;
-	//			}
-	//		}
 
-	//		SDL_BlitSurface(image, NULL, screenSurface, NULL);
-	//		SDL_UpdateWindowSurface(window);
-	//	}
-	//}
-	//closeWindow();
-}
+			
+		while (!quit)
+		{
+			loadImage(petitPacman);
+			SDL_BlitSurface(image, NULL, screenSurface, NULL);
+			SDL_UpdateWindowSurface(window);
+
+			while (SDL_PollEvent(&e) != 0)
+			{
+				if (e.type == SDL_QUIT)
+				{
+					quit = true;
+				}
+			}
+
+			if (e.type == SDL_KEYDOWN)
+			{
+				switch(e.key.keysym.sym)
+				{
+				case SDLK_UP: petitPacman.goUp();
+					break;
+
+				case SDLK_DOWN: petitPacman.goDown();
+					break;
+
+				case SDLK_LEFT: petitPacman.goLeft();
+					break;
+
+				case SDLK_RIGHT: petitPacman.goRight();
+					break;
+
+				default:
+					break;
+				}				
+			}
+			SDL_Rect rect;
+			rect.x = -5;
+			rect.y = -5;
+			SDL_BlitSurface(image, NULL, screenSurface, &rect);
+
+		}
+		closeWindow();
+	}
 
 
 void WindowController::initWindow() {
@@ -61,17 +81,17 @@ void WindowController::initWindow() {
 }
 
 
-bool WindowController::loadImage() {
-	bool success = true;
-	//Load PNG surface
-	image = loadSurface("PacmanDown.PNG");
-	if (image == NULL)
-	{
-		printf("Failed to load PNG image!\n");
-		success = false;
+	bool WindowController::loadImage(){
+		bool success = true;
+		//Load PNG surface
+		image = loadSurface("PacmanDown.PNG");
+		if( image == NULL )
+		{
+			printf( "Failed to load PNG image!\n" );
+			success = false;
+		}
+		return success;
 	}
-	return success;
-}
 
 void WindowController::loadMap(SDL_Renderer *renderer) {
 	Map map;
