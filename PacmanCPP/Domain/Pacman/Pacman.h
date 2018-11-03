@@ -24,11 +24,10 @@ public:
 	bool moveLeft();
 
 	bool moveRight();
-	
-	bool move(int nextXPos, int nextYPos);
-
 
 private:
+	bool move(int nextXPos, int nextYPos);
+
 	Map m_map;
 
 	std::string m_imagePath;

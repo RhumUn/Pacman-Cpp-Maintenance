@@ -1,46 +1,23 @@
-/*
- * Tile.cpp
- *
- *  Created on: 30 oct. 2018
- *      Author: Romain
- */
-
 #include "Tile.h"
 
-Tile::Tile(int _x, int _y, bool _obstacleState, bool _collectibleState) {
-	x = _x;
-	y = _y;
-	obstacleState = _obstacleState;
-	collectibleState = _collectibleState;
+Tile::Tile(bool isObstacle, bool isCollectible) : m_isObstacle(isObstacle), m_isCollectible(isCollectible) {
 }
 
-int Tile::getX() {
-	return this->x;
-}
-
-int Tile::getY() {
-	return this->y;
-}
-
-void Tile::setObstacleState(bool _obstacleState)
+void Tile::setObstacleState(bool isObstacle)
 {
-	this->obstacleState = _obstacleState;
+	this->m_isObstacle = isObstacle;
 }
 
-void Tile::setCollectibleState(bool _collectibleState)
+void Tile::setCollectibleState(bool isCollectible)
 {
-	this->collectibleState= _collectibleState;
+	this->m_isCollectible = isCollectible;
 }
 
 bool Tile::isObstacle() {
-	return this->obstacleState;
+	return this->m_isObstacle;
 }
 
 bool Tile::isCollectible() {
-	return this->collectibleState;
-}
-
-Tile::~Tile() {
-	// TODO Auto-generated destructor stub
+	return this->m_isCollectible;
 }
 
