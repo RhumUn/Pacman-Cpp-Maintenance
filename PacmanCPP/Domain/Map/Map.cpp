@@ -1,30 +1,20 @@
-/*
- * Map.cpp
- *
- *  Created on: 30 oct. 2018
- *      Author: Romain
- */
-#include <iostream>
-#include <iomanip>
-#include <algorithm>
-#include <iostream>
-#include <string>
-#include <vector>
 #include "../Map/Map.h"
-#include "../Tile/Tile.h"
-using namespace std;
 
-Map::Map() {
-	tiles = std::vector<std::vector<Tile>>(height);
+Map::Map() : m_tiles(std::vector<std::vector<Tile>>(this->m_height)) {
 }
 
-Map::~Map() {
-	// TODO Auto-generated destructor stub
+Tile Map::getTile(int x, int y) {
+	return this->m_tiles[x][y];
+}
+
+std::vector<std::vector<Tile>> Map::getTiles() {
+	return this->m_tiles;
 }
 
 void Map::Generate() {
-	string	layout[36];
+	std::string	layout[36];
 
+	//TODO Utiliser inFileStream
 	layout[0] = "1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1";
 	layout[1] = "1,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,1";
 	layout[2] = "1,2,1,1,2,1,1,1,2,1,1,2,1,1,1,2,1,1,2,1";
@@ -51,11 +41,11 @@ void Map::Generate() {
 	bool isObstacle;
 	bool isCollectible;
 
-	string layoutLine;
+	std::string layoutLine;
 
-	for (i = 0; i < height; i++) {
+	for (i = 0; i < this->m_height; i++) {
 		layoutLine = getLayoutLine(layout[i]);
-		for (j = 0; j < width; j++)
+		for (j = 0; j < this->m_width; j++)
 		{
 			if (layoutLine.at(j) == '1') {
 				isObstacle = true;
@@ -70,14 +60,14 @@ void Map::Generate() {
 				isObstacle = false;
 				isCollectible = false;
 			}
-			tiles[i].push_back(Tile(j, i, isObstacle, isCollectible));
+			this->m_tiles[i].push_back(Tile(j, i, isObstacle, isCollectible));
 		}
 	}
 }
 
-string Map::getLayoutLine(string line)
+std::string Map::getLayoutLine(std::string line)
 {
 	line.erase(std::remove(line.begin(), line.end(), ','), line.end());
-	line.erase(std::remove(line.begin(), line.end(), '\n'), line.end());
+
 	return line;
 }

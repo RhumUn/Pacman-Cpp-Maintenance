@@ -1,80 +1,54 @@
-#include <iostream>
-#include <string>
-
 #include "Pacman.h"
-#include "../Map/Map.h"
 
-using namespace std;
-	 Pacman::Pacman(Map _map){
-		 this->x = 6;
-		 this->y = 6;
-		 this->map = _map;
-		 this->score = 0;
-	 }
+Pacman::Pacman(Map map) : m_x(6), m_y(6), m_map(map), m_score() {
+}
 
-	 int Pacman::getX() const {
-	 	return x;
-	 }
+int Pacman::getX() const {
+	return this->m_x;
+}
 
-	 void Pacman::setX(int x) {
-	 	this->x = x;
-	 }
+void Pacman::setX(int x) {
+	this->m_x = x;
+}
 
-	 int Pacman::getY() const {
-	 	return y;
-	 }
+int Pacman::getY() const {
+	return this->m_y;
+}
 
-	 void Pacman::scoreUp(int tileX, int tileY)
-	 {
-		 this->score += 200;
-		 map.tiles[tileX][tileY].setCollectibleState(false);
-		 printf("Score: %i", this->score);
-	 }
+void Pacman::setY(int y) {
+	this->m_y = y;
+}
 
-	 void Pacman::setY(int y) {
-	 	this->y = y;
-	 }
+bool Pacman::moveUp() {
+	return Pacman::move(this->m_x, this->m_y - 1);
+}
+bool Pacman::moveDown() {
+	return Pacman::move(this->m_x, this->m_y + 1);
 
-	 bool Pacman::goUp(){
-		 if(!map.tiles[this->x][this->y - 1].isObstacle()){
-			 if (map.tiles[this->x][this->y - 1].isCollectible()) {
-				 scoreUp(this->x, this->y - 1);
-			 }
-			this-> y = y-1;
-			return true;
-		 }
-		 return false;
-	 }
-	 bool Pacman::goDown(){
-		 if (!map.tiles[this->x][this->y + 1].isObstacle()) {
-			 if (map.tiles[this->x][this->y + 1].isCollectible()) {
-				 scoreUp(this->x, this->y + 1);
-			 }
-			 this-> y = y+1;
-			 return true;
-		 }
-		 return false;
+}
+bool Pacman::moveLeft() {
+	return Pacman::move(this->m_x - 1, this->m_y);
 
-	 }
-	 bool Pacman::goLeft(){
-		 if (!map.tiles[this->x  - 1][this->y].isObstacle()) {
-			 if (map.tiles[this->x - 1][this->y].isCollectible()) {
-				 scoreUp(this->x - 1, this->y);
-			 }
-			 this-> x = x-1;
-			 return true;
-		 }
-		 return false;
+}
+bool Pacman::moveRight() {
+	return Pacman::move(this->m_x + 1, this->m_y);
+}
 
-	 }
-	 bool Pacman::goRight(){
-		 if (!map.tiles[this->x + 1][this->y].isObstacle()) {
-			 if (map.tiles[this->x + 1][this->y].isCollectible()) {
-				 scoreUp(this->x + 1, this->y);
-			 }
-			 this-> x = x+1;
-			 return true;
-		 }
-		 return false;
-	 }
+bool Pacman::move(int nextPosX, int nextPosY) {
+	if (m_map.getTile(nextPosX, nextPosY).isObstacle()) {
+		return false;
+	}
+
+	if (m_map.getTile(nextPosX, nextPosY).isCollectible()) {
+		this->m_score.updateScore(200);
+
+		this->m_map.getTile(nextPosX, nextPosY).setCollectibleState(false);
+	}
+
+	this->m_x = nextPosX;
+	this->m_y = nextPosY;
+
+	return true;
+}
+
 

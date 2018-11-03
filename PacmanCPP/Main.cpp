@@ -23,8 +23,8 @@ int main(int argc, char* argv[]) {
 
 	Map map;
 	map.Generate();
-	Pacman petitPacman(map);
-	WindowController window(petitPacman, map);
+	Pacman pacman(map);
+	WindowController window(pacman, map);
 
     return 0;
 }

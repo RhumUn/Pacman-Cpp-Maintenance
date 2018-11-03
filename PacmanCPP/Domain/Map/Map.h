@@ -1,25 +1,29 @@
-/*
- * Map.h
- *
- *  Created on: 30 oct. 2018
- *      Author: Romain
- */
-
 #ifndef Map_H_
 #define Map_H_
-#include "../Tile/Tile.h"
+
+#include <algorithm>
+#include<string>
 #include <vector>
-using namespace std;
+#include "../Tile/Tile.h"
 
 class Map {
 public:
 	Map();
-	virtual ~Map();
+
+	Tile getTile(int x, int y);
+
+	std::vector<std::vector<Tile>> getTiles();
+
 	void Generate();
-	string getLayoutLine(string line);
-	int height = 22;
-	int width = 20;
-	std::vector<std::vector<Tile>> tiles;
+
+private:
+	std::string getLayoutLine(std::string line);
+
+	int m_height = 22;
+
+	int m_width = 20;
+
+	std::vector<std::vector<Tile>> m_tiles;
 };
 
 #endif /* Map_H_ */

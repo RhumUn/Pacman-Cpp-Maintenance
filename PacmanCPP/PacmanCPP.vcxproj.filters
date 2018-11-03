@@ -30,9 +30,6 @@
     <Image Include="images\PacmanDown.PNG">
       <Filter>images</Filter>
     </Image>
-    <Image Include="..\..\..\Users\Popclem\Desktop\PacmanRight.PNG">
-      <Filter>Fichiers de ressources</Filter>
-    </Image>
     <Image Include="Resources\Map.PNG">
       <Filter>Fichiers de ressources</Filter>
     </Image>
@@ -46,6 +43,24 @@
       <Filter>Fichiers de ressources</Filter>
     </Image>
     <Image Include="Resources\PacmanUp.PNG">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\collectible_tile.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\img\PacmanDown.PNG">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\img\PacmanLeft.PNG">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\img\PacmanRight.PNG">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\img\PacmanUp.PNG">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\obstacle_tile.png">
       <Filter>Fichiers de ressources</Filter>
     </Image>
   </ItemGroup>
@@ -66,6 +81,12 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Controller\WindowController\WindowController.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Domain\Time\Time.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="FileStream\InFileStream\InFileStream.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
@@ -91,15 +112,18 @@
     <ClCompile Include="Main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="Domain\Time\Time.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="FileStream\InFileStream\InFileStream.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="x64\Debug\PacmanCPP.log" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="x64\Debug\PacmanCPP.tlog\PacmanCPP.lastbuildstate" />
     <None Include="zlib1.dll" />
     <None Include="SDL2_image.dll" />
     <None Include="SDL2.dll" />
     <None Include="libpng16-16.dll" />
+    <None Include="Resources\mapOpen.map" />
   </ItemGroup>
 </Project>

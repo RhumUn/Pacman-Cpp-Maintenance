@@ -74,6 +74,6 @@ std::string Score::scoresContentsToSave(std::vector<std::string> vectorOf5BestSc
 
 std::string Score::toString() {
 	Time time;
-	return  time.getCurrentTime + " :" + std::to_string(this->m_score);
+	return  time.getCurrentTime() + " :" + std::to_string(this->m_score);
 }
 

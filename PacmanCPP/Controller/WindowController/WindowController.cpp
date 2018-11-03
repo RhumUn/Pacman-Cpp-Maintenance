@@ -43,7 +43,7 @@ WindowController::WindowController(Pacman petitPacman, Map _map) {
 			switch (e.key.keysym.sym)
 			{
 			case SDLK_UP:
-				if (petitPacman.goUp()) {
+				if (petitPacman.moveUp()) {
 					this->pacmanTexture = SDL_CreateTextureFromSurface(renderer, this->pacmanSurfaceUp);
 					SDL_RenderCopy(this->renderer, emptyTileTexture, NULL, &pacmanPreviousPosition);
 					updatePacman(petitPacman);
@@ -51,7 +51,7 @@ WindowController::WindowController(Pacman petitPacman, Map _map) {
 				break;
 
 			case SDLK_DOWN:
-				if (petitPacman.goDown()) {
+				if (petitPacman.moveDown()) {
 					this->pacmanTexture = SDL_CreateTextureFromSurface(renderer, this->pacmanSurfaceDown);
 					SDL_RenderCopy(this->renderer, emptyTileTexture, NULL, &pacmanPreviousPosition);
 					updatePacman(petitPacman);
@@ -59,7 +59,7 @@ WindowController::WindowController(Pacman petitPacman, Map _map) {
 				break;
 
 			case SDLK_LEFT:
-				if (petitPacman.goLeft()) {
+				if (petitPacman.moveLeft()) {
 					this->pacmanTexture = SDL_CreateTextureFromSurface(renderer, this->pacmanSurfaceLeft);
 					SDL_RenderCopy(this->renderer, emptyTileTexture, NULL, &pacmanPreviousPosition);
 					updatePacman(petitPacman);
@@ -67,7 +67,7 @@ WindowController::WindowController(Pacman petitPacman, Map _map) {
 				break;
 
 			case SDLK_RIGHT:
-				if (petitPacman.goRight()) {
+				if (petitPacman.moveRight()) {
 					this->pacmanTexture = SDL_CreateTextureFromSurface(renderer, this->pacmanSurfaceRight);
 					SDL_RenderCopy(this->renderer, emptyTileTexture, NULL, &pacmanPreviousPosition);
 					updatePacman(petitPacman);
@@ -105,7 +105,7 @@ void WindowController::updateWindow() {
 
 void WindowController::loadMap() {
 	this->map.Generate();
-	std::vector<std::vector<Tile>> tilesMap = map.tiles;
+	std::vector<std::vector<Tile>> tilesMap = map.getTiles();
 
 	SDL_Surface* obstacleTileSurface = loadSurface("Resources/obstacle_tile.png");
 	SDL_Surface* collectibleTileSurface = loadSurface("Resources/collectible_tile.png");
