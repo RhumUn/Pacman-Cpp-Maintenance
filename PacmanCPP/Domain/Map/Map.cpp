@@ -60,7 +60,7 @@ void Map::Generate() {
 				isObstacle = false;
 				isCollectible = false;
 			}
-			this->m_tiles[i].push_back(Tile(j, i, isObstacle, isCollectible));
+			this->m_tiles[i].push_back(Tile(isObstacle, isCollectible));
 		}
 	}
 }

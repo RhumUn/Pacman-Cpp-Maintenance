@@ -1,19 +1,14 @@
 #include <windows.h>
 #include <SDL.h>
 
-#include "Controller/WindowController/WindowController.h"
+#include "Controller/GameController/GameController.h"
 #include "Domain/Map/Map.h"
 #include "Domain/Pacman/Pacman.h"
 
 using namespace std;
 
 int main(int argc, char* argv[]) {
-	Map map;
-	map.Generate();
-
-	Pacman pacman(map);
-
-	WindowController window(pacman, map);
+	GameController game;
 
 	return 0;
 }

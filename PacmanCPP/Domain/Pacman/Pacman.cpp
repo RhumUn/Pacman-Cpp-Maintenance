@@ -1,6 +1,7 @@
 #include "Pacman.h"
 
-Pacman::Pacman(Map map) : m_x(6), m_y(6), m_map(map), m_score() {
+Pacman::Pacman() : m_x(6), m_y(6), m_map(), m_score() {
+	this->m_map.Generate();
 }
 
 int Pacman::getX() const {
@@ -17,6 +18,10 @@ int Pacman::getY() const {
 
 void Pacman::setY(int y) {
 	this->m_y = y;
+}
+
+Map Pacman::getMap() const{
+	return this->m_map;
 }
 
 bool Pacman::moveUp() {

@@ -18,7 +18,7 @@ void Score::updateScore(int increment) {
 }
 
 void Score::saveScore() {
-	std::vector<std::string> vectorOf5BestScores = Score::get5BestScores();
+	std::vector<std::string> vectorOf5BestScores = get5BestScores();
 
 	if (Score::isOneOf5BestScores(vectorOf5BestScores)) {
 		OutFileStream stream("Score.txt");

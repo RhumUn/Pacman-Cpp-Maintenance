@@ -80,13 +80,13 @@
     <ClInclude Include="Domain\Tile\Tile.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Controller\WindowController\WindowController.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="Domain\Time\Time.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="FileStream\InFileStream\InFileStream.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller\GameController\GameController.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
@@ -106,9 +106,6 @@
     <ClCompile Include="FileStream\OutFileStream\OutFileStream.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Controller\WindowController\WindowController.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -116,6 +113,9 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="FileStream\InFileStream\InFileStream.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller\GameController\GameController.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>

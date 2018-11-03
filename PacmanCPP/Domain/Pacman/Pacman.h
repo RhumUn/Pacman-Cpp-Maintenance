@@ -7,7 +7,7 @@
 class Pacman
 {
 public:
-	Pacman(Map _map);
+	Pacman();
 
 	void setX(int x);
 
@@ -16,6 +16,8 @@ public:
 	int getX() const;
 
 	int getY() const;
+
+	Map getMap() const;
 
 	bool moveUp();
 
