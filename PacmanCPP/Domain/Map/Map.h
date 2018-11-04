@@ -5,6 +5,7 @@
 #include<string>
 #include <vector>
 #include "../Tile/Tile.h"
+#include "../../FileStream/InFileStream/InFileStream.h"
 
 class Map {
 public:
@@ -23,7 +24,7 @@ public:
 private:
 	std::string getLayoutLine(std::string line);
 
-	int m_height = 22, m_width = 20, m_nbCollectiblesToEat = 0;
+	int m_nbCollectiblesToEat = 0;
 
 	std::vector<std::vector<Tile>> m_tiles;
 };
