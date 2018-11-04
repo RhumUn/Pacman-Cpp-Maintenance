@@ -8,6 +8,7 @@
 class OutFileStream {
 public:
 	OutFileStream(std::string relativePath);
+
 	void write(std::string content);
 
 private:

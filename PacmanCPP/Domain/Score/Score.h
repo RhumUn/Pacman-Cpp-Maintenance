@@ -1,15 +1,11 @@
-/*
- * Score.h
- *
- *  Created on: 31 oct. 2018
- *      Author: vicdo
- */
-
 #ifndef DOMAIN_SCORE_H_
 #define DOMAIN_SCORE_H_
 
 #include <string>
 #include<vector>
+#include "../Time/Time.h"
+#include "../../FileStream/OutFileStream/OutFileStream.h"
+#include "../../FileStream//InFileStream/InFileStream.h"
 
 class Score {
 public:
@@ -21,9 +17,15 @@ public:
 
 	void saveScore();
 
-private:
-	int m_score;
+	std::string getScoreInformationToString();
 
+	std::string get5BestScoresToString();
+
+	void setTimer();
+
+	void setFinalScore();
+
+private:
 	std::vector<std::string> get5BestScores();
 
 	int getScoreValue(std::string scoreSavedInString);
@@ -32,7 +34,13 @@ private:
 
 	std::string scoresContentsToSave(std::vector<std::string> vectorOf5BestScores);
 
-	std::string toString();
+	std::string scoreToStringForSaving();
+
+	int m_score;
+
+	Time m_timeAtGameLaunch;
+
+	int m_timerInSeconds;
 };
 
 #endif /* DOMAIN_SCORE_H_ */

@@ -3,12 +3,20 @@
 Map::Map() : m_tiles(std::vector<std::vector<Tile>>(this->m_height)) {
 }
 
-Tile Map::getTile(int x, int y) {
+Tile& Map::getTile(int x, int y) {
 	return this->m_tiles[x][y];
 }
 
 std::vector<std::vector<Tile>> Map::getTiles() {
 	return this->m_tiles;
+}
+
+int Map::getNbCollectiblesToEat() {
+	return this->m_nbCollectiblesToEat;
+}
+
+void Map::decrementCollectiblesToEat() {
+	this->m_nbCollectiblesToEat--;
 }
 
 void Map::Generate() {
@@ -37,29 +45,27 @@ void Map::Generate() {
 	layout[19] = "1,2,1,1,1,1,1,1,2,1,1,2,1,1,1,1,1,1,2,1";
 	layout[20] = "1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1";
 	layout[21] = "1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1";
-	int i, j;
-	bool isObstacle;
-	bool isCollectible;
 
+	int i, j;
+	bool isObstacle, isCollectible;
 	std::string layoutLine;
 
 	for (i = 0; i < this->m_height; i++) {
 		layoutLine = getLayoutLine(layout[i]);
 		for (j = 0; j < this->m_width; j++)
 		{
+			isObstacle = false;
+			isCollectible = false;
+
 			if (layoutLine.at(j) == '1') {
 				isObstacle = true;
-				isCollectible = false;
 			}
 			else if (layoutLine.at(j) == '2')
 			{
-				isObstacle = false;
 				isCollectible = true;
+				this->m_nbCollectiblesToEat++;
 			}
-			else {
-				isObstacle = false;
-				isCollectible = false;
-			}
+
 			this->m_tiles[i].push_back(Tile(isObstacle, isCollectible));
 		}
 	}

@@ -2,71 +2,13 @@
 
 GameController::GameController() : m_pacman(Pacman()) {
 	this->initWindow();
+
 	this->drawMap();
+	
 	this->initSettingToDrawPacman();
 	this->drawPacman(this->m_pacmanLeftSurface);
+	
 	this->updateWindow();
-
-
-	//To change
-	bool quit = false;
-	SDL_Rect previousRectangleFilledWithPacman;
-	previousRectangleFilledWithPacman.h = m_cellSize;
-	previousRectangleFilledWithPacman.w = m_cellSize;
-
-	//To change
-	while (!quit)
-	{
-		SDL_Event event;
-
-		while (SDL_PollEvent(&event) != 0)
-		{
-			if (event.type == SDL_QUIT)
-			{
-				quit = true;
-			}
-		}
-
-		if (event.type == SDL_KEYDOWN)
-		{
-			previousRectangleFilledWithPacman.x = this->m_pacman.getX() * m_cellSize;
-			previousRectangleFilledWithPacman.y = this->m_pacman.getY() * m_cellSize;
-			switch (event.key.keysym.sym)
-			{
-			case SDLK_UP:
-				if (this->m_pacman.moveUp()) {
-					this->updateDisplayAfterPacmanMoved(this->m_pacmanUpSurface, previousRectangleFilledWithPacman);
-				}
-				break;
-
-			case SDLK_DOWN:
-				if (this->m_pacman.moveDown()) {
-					this->updateDisplayAfterPacmanMoved(this->m_pacmanDownSurface, previousRectangleFilledWithPacman);
-				}
-				break;
-
-			case SDLK_LEFT:
-				if (this->m_pacman.moveLeft()) {
-					this->updateDisplayAfterPacmanMoved(this->m_pacmanLeftSurface, previousRectangleFilledWithPacman);
-				}
-				break;
-
-			case SDLK_RIGHT:
-				if (this->m_pacman.moveRight()) {
-					this->updateDisplayAfterPacmanMoved(this->m_pacmanRightSurface, previousRectangleFilledWithPacman);
-				}
-				break;
-
-			default:
-				break;
-			}
-
-			this->updateWindow();
-
-			SDL_Delay(100);
-		}
-	}
-	closeWindow();
 }
 
 void GameController::initWindow() {
@@ -169,12 +111,77 @@ SDL_Surface* GameController::createSDLSurface(std::string imgPath) {
 	return optimizedSurface;
 }
 
+void GameController::play()
+{
+	SDL_Event event;
+
+	bool quit = false;
+
+	SDL_Rect previousRectangleFilledWithPacman;
+	previousRectangleFilledWithPacman.h = m_cellSize;
+	previousRectangleFilledWithPacman.w = m_cellSize;
+
+	while (SDL_PollEvent(&event) != 0 || (!quit && !this->m_pacman.isEndOfGame()))
+	{
+		if (event.type == SDL_QUIT)
+			quit = true;
+
+		if (event.type == SDL_KEYDOWN)
+		{
+			previousRectangleFilledWithPacman.x = this->m_pacman.getX() * this->m_cellSize;
+			previousRectangleFilledWithPacman.y = this->m_pacman.getY() * this->m_cellSize;
+
+			switch (event.key.keysym.sym)
+			{
+			case SDLK_UP:
+				if (this->m_pacman.moveUp())
+					this->updateDisplayAfterPacmanMoved(this->m_pacmanUpSurface, previousRectangleFilledWithPacman);
+
+				break;
+
+			case SDLK_DOWN:
+				if (this->m_pacman.moveDown())
+					this->updateDisplayAfterPacmanMoved(this->m_pacmanDownSurface, previousRectangleFilledWithPacman);
+
+				break;
+
+			case SDLK_LEFT:
+				if (this->m_pacman.moveLeft())
+					this->updateDisplayAfterPacmanMoved(this->m_pacmanLeftSurface, previousRectangleFilledWithPacman);
+
+				break;
+
+			case SDLK_RIGHT:
+				if (this->m_pacman.moveRight())
+					this->updateDisplayAfterPacmanMoved(this->m_pacmanRightSurface, previousRectangleFilledWithPacman);
+
+				break;
+
+			default:
+				break;
+			}
+
+			this->updateWindow();
+
+			SDL_Delay(100);
+		}
+	}
+}
+
+void GameController::endOfGame() {
+	Score score = this->m_pacman.getScore();
+
+	if (this->m_pacman.isEndOfGame()) {
+		score.setTimer();
+		score.setFinalScore();
+		score.saveScore();
+		printf(score.getScoreInformationToString().c_str());
+	}
+
+	printf(score.get5BestScoresToString().c_str());
+}
+
 void GameController::closeWindow() {
-	SDL_FreeSurface(image);
-	image = NULL;
-	SDL_DestroyWindow(m_SDLWindow);
-	this->m_SDLWindow = NULL;
-	IMG_Quit();
-	SDL_Quit();
+	SDL_DestroyWindow(this->m_SDLWindow);
 }
 

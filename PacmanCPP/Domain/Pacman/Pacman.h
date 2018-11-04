@@ -19,6 +19,8 @@ public:
 
 	Map getMap() const;
 
+	Score getScore() const;
+
 	bool moveUp();
 
 	bool moveDown();
@@ -26,6 +28,8 @@ public:
 	bool moveLeft();
 
 	bool moveRight();
+
+	bool isEndOfGame();
 
 private:
 	bool move(int nextXPos, int nextYPos);

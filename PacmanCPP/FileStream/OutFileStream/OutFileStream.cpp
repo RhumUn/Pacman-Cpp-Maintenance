@@ -1,7 +1,4 @@
 #include "OutFileStream.h"
-#include <fstream>
-#include <iostream>
-#include <string>
 
 OutFileStream::OutFileStream(std::string relativePath) :
 	m_outFileStream(relativePath) {

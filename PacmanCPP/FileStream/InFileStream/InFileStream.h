@@ -10,10 +10,12 @@ class InFileStream
 {
 public:
 	InFileStream(std::string relativePath);
+
 	std::vector<std::string> readLineByLine();
 
 private:
 	std::ifstream  m_inFileStream;
+
 	std::vector<std::string> read();
 };
 

@@ -1,25 +1,28 @@
 #include "Time.h"
-#include <string>
-#include <time.h>
-#include <iostream>
 
-Time::Time() {}
+Time::Time() {
+	time(&this->m_dateTime);
+	localtime_s(&this->m_timeStructure, &this->m_dateTime);
+}
 
-std::string Time::getCurrentTime() {
-	// current date/time based on current system
-	time_t now;
-	struct tm timeinfo;
-	time(&now);
-	localtime_s(&timeinfo, &now);
+time_t Time::getDateTime() {
+	return this->m_dateTime;
+}
 
+int Time::getDiffWithPreviousTimeInSeconds(Time previousTime) {
+	time_t previousDateTime = previousTime.getDateTime();
+	return (int)difftime(this->m_dateTime,previousDateTime);
+}
+
+std::string Time::getCurrentDateTimeToString() {
 	std::string timeToString;
 
-	timeToString += Time::formatTMStructure(timeinfo.tm_mday) + "/";
-	timeToString += Time::formatTMStructure(1 + timeinfo.tm_mon) + "/";
-	timeToString += Time::formatTMStructure(1900 + timeinfo.tm_year) + " ";
-	timeToString += Time::formatTMStructure(timeinfo.tm_hour) + ":";
-	timeToString += Time::formatTMStructure(timeinfo.tm_min) + ":";
-	timeToString += Time::formatTMStructure(timeinfo.tm_sec);
+	timeToString += this->formatTMStructure(this->m_timeStructure.tm_mday) + "/";
+	timeToString += this->formatTMStructure(1 + this->m_timeStructure.tm_mon) + "/";
+	timeToString += this->formatTMStructure(1900 + this->m_timeStructure.tm_year) + " ";
+	timeToString += this->formatTMStructure(this->m_timeStructure.tm_hour) + ":";
+	timeToString += this->formatTMStructure(this->m_timeStructure.tm_min) + ":";
+	timeToString += this->formatTMStructure(this->m_timeStructure.tm_sec);
 
 	return timeToString;
 }

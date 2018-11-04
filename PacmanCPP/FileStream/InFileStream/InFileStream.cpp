@@ -1,7 +1,4 @@
 #include "InFileStream.h"
-#include <fstream>
-#include <iostream>
-#include <string>
 
 InFileStream::InFileStream(std::string relativePath) :
 	m_inFileStream(relativePath) {
@@ -17,7 +14,7 @@ std::vector<std::string> InFileStream::readLineByLine() {
 		}
 	}
 	catch (const char* error) {
-		std::cerr << error << std::endl;
+		std::cerr << error << ": Création d'un nouveau fichier .txt" << std::endl;
 		std::vector<std::string> emptyVector;
 		return emptyVector;
 	}

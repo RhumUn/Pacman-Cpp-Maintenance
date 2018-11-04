@@ -1,3 +1,5 @@
+#include<iostream>
+
 #include "Pacman.h"
 
 Pacman::Pacman() : m_x(6), m_y(6), m_map(), m_score() {
@@ -24,6 +26,10 @@ Map Pacman::getMap() const{
 	return this->m_map;
 }
 
+Score Pacman::getScore() const {
+	return this->m_score;
+}
+
 bool Pacman::moveUp() {
 	return Pacman::move(this->m_x, this->m_y - 1);
 }
@@ -40,20 +46,28 @@ bool Pacman::moveRight() {
 }
 
 bool Pacman::move(int nextPosX, int nextPosY) {
-	if (m_map.getTile(nextPosX, nextPosY).isObstacle()) {
+	Tile& nextTile = this->m_map.getTile(nextPosX, nextPosY);
+
+	if (nextTile.isObstacle()) {
 		return false;
 	}
 
-	if (m_map.getTile(nextPosX, nextPosY).isCollectible()) {
-		this->m_score.updateScore(200);
+	if (nextTile.isCollectible()) {
+		this->m_score.updateScore(100);
 
-		this->m_map.getTile(nextPosX, nextPosY).setCollectibleState(false);
+		nextTile.setCollectibleState(false);
+
+		this->m_map.decrementCollectiblesToEat();
 	}
 
 	this->m_x = nextPosX;
 	this->m_y = nextPosY;
 
 	return true;
+}
+
+bool Pacman::isEndOfGame() {
+	return this->m_map.getNbCollectiblesToEat() == 0;
 }
 
 
